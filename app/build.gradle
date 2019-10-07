@@ -52,3 +52,5 @@ dependencies {
     // debugging
     implementation "com.jakewharton.timber:timber:$timberVersion"
 }
+
+apply from: '../spotless.gradle'
