@@ -51,6 +51,9 @@ dependencies {
 
     // debugging
     implementation "com.jakewharton.timber:timber:$timberVersion"
+
+    // internal modules
+    implementation project(":core")
 }
 
 apply from: '../spotless.gradle'
