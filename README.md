@@ -1,8 +1,33 @@
-# Github Feed
+# GithubFeed
 
-`Team Mulro`
+Check your Github feed and trending repositories in your hands!
 
-## LICENSE
+## Tech Stack
+
+* Android Studio
+* Minimum SDK level 21
+* Kotlin based
+* Architecture
+  * MVP (Model-View-Presenter)
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://github.com/devFallingstar/GithubFeed/blob/master/CONTRIBUTING.md) for details.
+
+## Authors
+
+* Team Mulro
+  * [@rurimo](https://github.com/rurimo)
+  * [@PaleCosmos](https://github.com/PaleCosmos)
+  * [@devFallingstar](https://github.com/devFallingstar)
+  * [@shineceo97](https://github.com/shineceo97)
+  * [@Aftermoon-dev](https://github.com/Aftermoon-dev)
+  * [@jungh0](https://github.com/jungh0)
+
+* Contributors
+...
+
+## License
 
 ```
    Copyright 2019 Team Mulro in BlueCat-Community
