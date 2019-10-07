@@ -2,6 +2,9 @@
 
 Check your Github feed and trending repositories in your hands!
 
+## Build Status
+[![Build Status](https://travis-ci.org/BlueCat-Community/GithubFeed.svg?branch=master)](https://travis-ci.org/BlueCat-Community/GithubFeed)
+
 ## Tech Stack
 
 * Android Studio
