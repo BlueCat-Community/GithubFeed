@@ -12,7 +12,7 @@ Check your Github feed and trending repositories in your hands!
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/devFallingstar/GithubFeed/blob/master/CONTRIBUTING.md) for details.
+Please read [CONTRIBUTING.md](https://github.com/BlueCat-Community/GithubFeed/blob/master/CONTRIBUTING.md) for details.
 
 ## Authors
 
