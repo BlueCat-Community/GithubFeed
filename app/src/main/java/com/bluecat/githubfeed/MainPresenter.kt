@@ -16,23 +16,16 @@
 
 package com.bluecat.githubfeed
 
-import android.os.Bundle
-import com.bluecat.core.BaseActivity
-import com.bluecat.core.qualifiers.RequirePresenter
-import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.toast
+import com.bluecat.core.BasePresenter
+import timber.log.Timber
 
-@RequirePresenter(MainPresenter::class)
-class MainActivity : BaseActivity<MainPresenter, MainActivityView>(), MainActivityView {
+class MainPresenter : BasePresenter<MainActivityView>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        initBaseView(this)
+    init {
+        Timber.d("Initialize MainPresenter.")
     }
 
-    override fun initializeUI() {
-        text_hello.text = this.presenter.getHelloMessage()
-        toast(this.presenter.getHelloMessage())
+    fun getHelloMessage(): String {
+        return "hello, GitHub Feed!"
     }
 }
