@@ -14,10 +14,20 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.main
+package com.bluecat.githubfeed.api
 
-import com.bluecat.core.BaseView
+import okhttp3.Interceptor
+import okhttp3.Response
 
-interface MainActivityView : BaseView {
-    fun getGitHubUserInfo(username: String)
+internal class RequestInterceptor : Interceptor {
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val originalRequest = chain.request()
+        val originalUrl = originalRequest.url()
+        val url = originalUrl.newBuilder()
+            .build()
+
+        val requestBuilder = originalRequest.newBuilder().url(url)
+        val request = requestBuilder.build()
+        return chain.proceed(request)
+    }
 }

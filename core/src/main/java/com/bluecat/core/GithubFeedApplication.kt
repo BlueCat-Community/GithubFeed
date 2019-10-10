@@ -17,10 +17,17 @@
 package com.bluecat.core
 
 import android.app.Application
+import com.skydoves.core.BuildConfig
+import timber.log.Timber
 
 class GithubFeedApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        // initialize Timber
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
 }

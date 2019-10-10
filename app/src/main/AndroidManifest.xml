@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.bluecat.githubfeed">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="com.bluecat.core.GithubFeedApplication"
         android:allowBackup="true"

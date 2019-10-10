@@ -14,28 +14,16 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.main
+package com.bluecat.githubfeed.api
 
 import androidx.lifecycle.LiveData
-import com.bluecat.core.BasePresenter
-import com.bluecat.githubfeed.api.ApiResponse
-import com.bluecat.githubfeed.api.NetworkModule
 import com.bluecat.githubfeed.model.GithubUser
-import timber.log.Timber
+import retrofit2.http.GET
+import retrofit2.http.Path
 
-class MainPresenter : BasePresenter<MainActivityView>() {
+interface UsersService {
 
-    private val usersService = NetworkModule.userService
-
-    init {
-        Timber.d("Initialize MainPresenter.")
-    }
-
-    fun getHelloMessage(): String {
-        return "hello, GitHub Feed!"
-    }
-
-    fun fetchUserInfo(username: String): LiveData<ApiResponse<GithubUser>> {
-        return this.usersService.fetchUser(username)
-    }
+    // https://developer.github.com/v3/users/
+    @GET("/users/{username}")
+    fun fetchUser(@Path("username") username: String): LiveData<ApiResponse<GithubUser>>
 }
