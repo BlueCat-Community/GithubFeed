@@ -17,6 +17,7 @@
 package com.bluecat.githubfeed
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import com.bluecat.core.BaseActivity
 import com.bluecat.core.qualifiers.RequirePresenter
 import kotlinx.android.synthetic.main.activity_main.*
@@ -29,10 +30,19 @@ class MainActivity : BaseActivity<MainPresenter, MainActivityView>(), MainActivi
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initBaseView(this)
+
+        // fetch user information
+        getGitHubUserInfo("skydoves")
     }
 
     override fun initializeUI() {
         text_hello.text = this.presenter.getHelloMessage()
         toast(this.presenter.getHelloMessage())
+    }
+
+    override fun getGitHubUserInfo(username: String) {
+        this.presenter.fetchUserInfo(username).observe(this, Observer {
+            text_hello.text = it.toString()
+        })
     }
 }

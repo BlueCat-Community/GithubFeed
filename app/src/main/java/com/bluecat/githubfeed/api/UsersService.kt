@@ -14,10 +14,16 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed
+package com.bluecat.githubfeed.api
 
-import com.bluecat.core.BaseView
+import androidx.lifecycle.LiveData
+import com.bluecat.githubfeed.model.GithubUser
+import retrofit2.http.GET
+import retrofit2.http.Path
 
-interface MainActivityView : BaseView {
-    fun getGitHubUserInfo(username: String)
+interface UsersService {
+
+    // https://developer.github.com/v3/users/
+    @GET("/users/{username}")
+    fun fetchUser(@Path("username") username: String): LiveData<ApiResponse<GithubUser>>
 }

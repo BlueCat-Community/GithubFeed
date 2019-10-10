@@ -16,10 +16,16 @@
 
 package com.bluecat.githubfeed
 
+import androidx.lifecycle.LiveData
 import com.bluecat.core.BasePresenter
+import com.bluecat.githubfeed.api.ApiResponse
+import com.bluecat.githubfeed.api.NetworkModule
+import com.bluecat.githubfeed.model.GithubUser
 import timber.log.Timber
 
 class MainPresenter : BasePresenter<MainActivityView>() {
+
+    private val usersService = NetworkModule.userService
 
     init {
         Timber.d("Initialize MainPresenter.")
@@ -27,5 +33,9 @@ class MainPresenter : BasePresenter<MainActivityView>() {
 
     fun getHelloMessage(): String {
         return "hello, GitHub Feed!"
+    }
+
+    fun fetchUserInfo(username: String): LiveData<ApiResponse<GithubUser>> {
+        return this.usersService.fetchUser(username)
     }
 }

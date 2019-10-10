@@ -19,7 +19,6 @@ buildscript {
 
         timberVersion = '4.7.1'
 
-        koinVersion = '2.0.1'
         glideVersion = '4.9.0'
 
         spotlessVersion = '3.22.0'
