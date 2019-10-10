@@ -14,8 +14,18 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed
+package com.bluecat.githubfeed.main
 
-import com.bluecat.core.BaseView
+import com.bluecat.core.BasePresenter
+import timber.log.Timber
 
-interface MainActivityView : BaseView
+class MainPresenter : BasePresenter<MainActivityView>() {
+
+    init {
+        Timber.d("Initialize MainPresenter.")
+    }
+
+    fun getHelloMessage(): String {
+        return "hello, GitHub Feed!"
+    }
+}
