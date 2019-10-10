@@ -26,7 +26,7 @@ Please read [CONTRIBUTING.md](https://github.com/BlueCat-Community/GithubFeed/bl
   * [@shineceo97](https://github.com/shineceo97)
   * [@Aftermoon-dev](https://github.com/Aftermoon-dev)
   * [@jungh0](https://github.com/jungh0)
-  * [tlaabs](https://github.com/tlaabs)
+  * [@tlaabs](https://github.com/tlaabs)
 
 * Contributors
 ...
