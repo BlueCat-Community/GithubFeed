@@ -94,12 +94,13 @@ public abstract class BaseActivity<Presenter extends BasePresenter, ViewType ext
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    protected void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
 
         final Bundle presenterEnvelope = new Bundle();
         if (this.presenter != null) {
             ActivityPresenterManager.Companion.getInstance().save(this.presenter, presenterEnvelope);
+            assignPresenter(savedInstanceState);
         }
     }
 
@@ -128,7 +129,6 @@ public abstract class BaseActivity<Presenter extends BasePresenter, ViewType ext
     @CallSuper
     protected void initBaseView(ViewType viewType) {
         this.baseView = viewType;
-
         if (baseView != null) {
             assignPresenter(null);
             this.baseView.initializeUI();

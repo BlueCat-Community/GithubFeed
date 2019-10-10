@@ -9,11 +9,17 @@ buildscript {
         materialVersion = '1.1.0-beta01'
         ankoVersion = '0.10.8'
 
+        // architecture components
+        archCompomentVersion = '2.0.0'
+        lifecycleVersion = '2.2.0-alpha03'
+        roomVersion = '2.2.0-beta01'
+
         retrofitVersion = '2.3.0'
         okhttpVersion = '3.11.0'
 
         timberVersion = '4.7.1'
 
+        koinVersion = '2.0.1'
         glideVersion = '4.9.0'
 
         spotlessVersion = '3.22.0'
