@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">GithubFeed</string>
+    <string name="app_name">GitHubFeed</string>
+    <string name="splash_name">GitHub Feed</string>
 </resources>
