@@ -16,8 +16,14 @@
 
 package com.bluecat.githubfeed.splash
 
+import android.os.Handler
+import android.os.Looper
 import com.bluecat.core.BasePresenter
+import timber.log.Timber
 
 class SplashPresenter:BasePresenter<SplashActivityView>() {
-
+    init {
+        Timber.d("Initialize SplashPresenter.")
+        Handler(Looper.getMainLooper()).postDelayed({baseView.moveMain()},1000)
+    }
 }

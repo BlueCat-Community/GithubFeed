@@ -17,7 +17,9 @@
 package com.bluecat.core
 
 import android.app.Application
-import com.skydoves.core.BuildConfig
+
+//Reference Error
+//import com.skydoves.core.BuildConfig
 import timber.log.Timber
 
 class GithubFeedApplication : Application() {
