@@ -14,17 +14,19 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed
+package com.bluecat.githubfeed.main
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.bluecat.core.BaseActivity
 import com.bluecat.core.qualifiers.RequirePresenter
+import com.bluecat.githubfeed.R
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
 
 @RequirePresenter(MainPresenter::class)
-class MainActivity : BaseActivity<MainPresenter, MainActivityView>(), MainActivityView {
+class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
+    MainActivityView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

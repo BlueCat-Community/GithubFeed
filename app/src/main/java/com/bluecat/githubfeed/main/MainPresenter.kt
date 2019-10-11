@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed
+package com.bluecat.githubfeed.main
 
 import androidx.lifecycle.LiveData
 import com.bluecat.core.BasePresenter

@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed
+package com.bluecat.githubfeed.splash
 
-import com.bluecat.core.BaseView
+import com.bluecat.core.BasePresenter
 
-interface MainActivityView : BaseView {
-    fun getGitHubUserInfo(username: String)
+class SplashPresenter:BasePresenter<SplashActivityView>() {
+
 }
