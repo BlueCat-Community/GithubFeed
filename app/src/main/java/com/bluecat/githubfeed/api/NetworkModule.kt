@@ -28,6 +28,7 @@ object NetworkModule {
 
     private val retrofit: Retrofit
     val userService: UsersService
+    val loginService: LoginService
 
     init {
         this.retrofit = Retrofit.Builder()
@@ -38,5 +39,6 @@ object NetworkModule {
             .build()
 
         this.userService = retrofit.create(UsersService::class.java)
+        this.loginService = retrofit.create(LoginService::class.java)
     }
 }

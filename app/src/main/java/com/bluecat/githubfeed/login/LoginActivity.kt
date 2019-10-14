@@ -1,46 +1,42 @@
 package com.bluecat.githubfeed.login
 
-import android.content.pm.ActivityInfo
-import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import com.bluecat.core.BaseActivity
 import com.bluecat.core.qualifiers.RequirePresenter
 import com.bluecat.githubfeed.R
 import kotlinx.android.synthetic.main.activity_login.*
 
 @RequirePresenter(LoginPresenter::class)
-class LoginActivity:BaseActivity<LoginPresenter, LoginActivityView>(), LoginActivityView {
+class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(), LoginActivityView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        setContentView(R.layout.activity_login)
         initBaseView(this)
     }
 
     override fun initializeUI() {
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        supportActionBar?.hide()
-        window.statusBarColor = resources.getColor(R.color.splash_statusbar_color)
+        OTPEdit.visibility = View.GONE
 
-        loginButton.setOnClickListener {
-            val id = idBox.text.toString()
-            val pw = pwBox.text.toString()
+        loginBtn.setOnClickListener {
+            val username = usernameEdit.text.toString()
+            val password = passwordEdit.text.toString()
+            val otpCode = OTPEdit.text.toString()
 
-            presenter.checkLoginData(id, pw)
+            this.presenter.authenticateUser(username,password,otpCode)
         }
     }
 
-    override fun onLoginSuccess() {
-        TODO()
+    override fun onLoginSuccess(name: String?) {
+        Toast.makeText(this,"안녕하세요. $name 님.",Toast.LENGTH_SHORT).show()
     }
 
-    override fun onLoginFailure() {
-        TODO()
-    }
-
-    override fun setRequestedOrientation(requestedOrientation: Int) {
-        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.O) {
-            super.setRequestedOrientation(requestedOrientation)
+    override fun onLoginFailure(state: String?, needOTP : Boolean) {
+        Toast.makeText(this,"Login Failure : $state",Toast.LENGTH_SHORT).show()
+        if(needOTP == true){
+            OTPEdit.visibility = View.VISIBLE
         }
     }
 }
