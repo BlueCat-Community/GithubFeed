@@ -12,11 +12,11 @@ object AuthUtil {
         return "Basic " + Base64.encodeToString("$username:$password".toByteArray(), Base64.NO_WRAP)
     }
 
-    fun getFailureCause(message : String?): Int {
+    fun getFailureCause(message: String?): Int {
         val cause = JSONObject(message).get("message") as String
-        when(cause.contains("OTP")){
-            true -> return NEED_TWO_FACTOR
-            false -> return BAD_CREDENTIAL
+        return when (cause.contains("OTP")) {
+            true -> NEED_TWO_FACTOR
+            false -> BAD_CREDENTIAL
         }
     }
 }
