@@ -26,7 +26,7 @@ import com.bluecat.githubfeed.R
 import com.bluecat.githubfeed.login.LoginActivity
 
 @RequirePresenter(SplashPresenter::class)
-class SplashActivity:BaseActivity<SplashPresenter, SplashActivityView>(), SplashActivityView {
+class SplashActivity : BaseActivity<SplashPresenter, SplashActivityView>(), SplashActivityView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

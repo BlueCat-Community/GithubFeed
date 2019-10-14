@@ -14,21 +14,24 @@ class LoginPresenter : BasePresenter<LoginActivityView>() {
         Timber.d("Initialize LoginPresenter.")
     }
 
-    fun authenticateUser(username: String, password: String, otpCode: String?){
-        this.loginService.authenticateUser(AuthUtil.basic(username,password),otpCode).observe(this.baseView as LifecycleOwner,
-            Observer {
-                if(it.isSuccessful){
-                    this.baseView.onLoginSuccess(it.body?.name)
-                } else if(it.code in 400..500){
-
-                    when(AuthUtil.getFailureCause(it.message)){
-                        AuthUtil.BAD_CREDENTIAL -> this.baseView.onLoginFailure("Sign in failed",false)
-                        AuthUtil.NEED_TWO_FACTOR -> this.baseView.onLoginFailure("Two factors OTP is required",true)
+    fun authenticateUser(username: String, password: String, otpCode: String?) {
+        this.loginService.authenticateUser(AuthUtil.basic(username, password), otpCode)
+            .observe(this.baseView as LifecycleOwner,
+                Observer {
+                    when {
+                        it.isSuccessful -> this.baseView.onLoginSuccess(it.body?.name)
+                        it.code in 400..500 -> when (AuthUtil.getFailureCause(it.message)) {
+                            AuthUtil.BAD_CREDENTIAL -> this.baseView.onLoginFailure(
+                                "Sign in failed",
+                                false
+                            )
+                            AuthUtil.NEED_TWO_FACTOR -> this.baseView.onLoginFailure(
+                                "Two factors OTP is required",
+                                true
+                            )
+                        }
+                        else -> this.baseView.onLoginFailure("Unknown error", false)
                     }
-
-                } else {
-                    this.baseView.onLoginFailure("Unknown error",false)
-                }
-            })
+                })
     }
 }
