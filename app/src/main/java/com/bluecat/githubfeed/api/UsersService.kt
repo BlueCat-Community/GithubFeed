@@ -26,6 +26,4 @@ interface UsersService {
     // https://developer.github.com/v3/users/
     @GET("/users/{username}")
     fun fetchUser(@Path("username") username: String): LiveData<ApiResponse<GithubUser>>
-
-
 }

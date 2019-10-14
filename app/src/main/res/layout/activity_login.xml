@@ -16,6 +16,7 @@
         android:padding="30dp">
 
         <EditText
+            android:id="@+id/usernameEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -24,6 +25,7 @@
             tools:text="Username" />
 
         <EditText
+            android:id="@+id/passwordEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -31,7 +33,18 @@
             android:inputType="textPassword"
             tools:text="Paswword" />
 
+        <EditText
+            android:id="@+id/OTPEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="Two-factor authentication code"
+            android:inputType="number"
+            android:visibility="gone"
+            tools:text="Two-factor authentication code" />
+
         <Button
+            android:id="@+id/loginBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Login" />
