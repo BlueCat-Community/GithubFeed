@@ -16,6 +16,8 @@
 
 package com.bluecat.core
 
-interface BaseView {
+import androidx.lifecycle.LifecycleOwner
+
+interface BaseView : LifecycleOwner {
     fun initializeUI()
 }

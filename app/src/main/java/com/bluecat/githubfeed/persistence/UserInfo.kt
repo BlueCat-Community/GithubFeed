@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.login
+package com.bluecat.githubfeed.persistence
 
-import com.bluecat.core.BaseView
+import com.skydoves.preferenceroom.PreferenceEntity
 
-interface LoginActivityView : BaseView {
-    fun onLoginSuccess(name: String?)
-    fun onLoginFailure(state: String?, needOTP: Boolean)
+@PreferenceEntity
+open class UserInfo {
+    @JvmField
+    val token: String = ""
 }

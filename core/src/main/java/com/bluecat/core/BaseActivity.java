@@ -107,11 +107,11 @@ public abstract class BaseActivity<Presenter extends BasePresenter, ViewType ext
     /**
      * get WDApplication
      *
-     * @return {@link GithubFeedApplication} instance
+     * @return {@link CoreApplication} instance
      */
     protected @NonNull
-    GithubFeedApplication application() {
-        return (GithubFeedApplication) getApplication();
+    CoreApplication application() {
+        return (CoreApplication) getApplication();
     }
 
     /**

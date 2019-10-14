@@ -14,11 +14,20 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.login
+package com.bluecat.core
 
-import com.bluecat.core.BaseView
+import android.app.Application
 
-interface LoginActivityView : BaseView {
-    fun onLoginSuccess(name: String?)
-    fun onLoginFailure(state: String?, needOTP: Boolean)
+import timber.log.Timber
+
+open class CoreApplication : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+
+        // initialize Timber
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
+    }
 }

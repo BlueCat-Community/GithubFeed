@@ -16,18 +16,28 @@
 
 package com.bluecat.githubfeed.api
 
+import com.bluecat.githubfeed.persistence.PreferenceComponent_PrefComponent
 import okhttp3.Interceptor
 import okhttp3.Response
 
 internal class RequestInterceptor : Interceptor {
+
+    private val userInfo = PreferenceComponent_PrefComponent.getInstance().UserInfo()
+
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val originalUrl = originalRequest.url()
-        val url = originalUrl.newBuilder()
-            .build()
+        val url = originalUrl.newBuilder().build()
 
-        val requestBuilder = originalRequest.newBuilder().url(url)
+        val requestBuilder = originalRequest.newBuilder()
+            .url(url)
+
+        if (!userInfo.token.isNullOrEmpty()) {
+            requestBuilder.addHeader("Authorization", userInfo.token)
+        }
+
         val request = requestBuilder.build()
+
         return chain.proceed(request)
     }
 }

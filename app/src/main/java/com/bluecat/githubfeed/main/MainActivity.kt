@@ -19,6 +19,7 @@ package com.bluecat.githubfeed.main
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.bluecat.core.BaseActivity
 import com.bluecat.core.qualifiers.RequirePresenter
@@ -41,13 +42,12 @@ class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
     override fun initializeUI() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         supportActionBar?.hide()
-        window.statusBarColor = resources.getColor(R.color.splash_statusbar_color)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.splash_statusbar_color)
         toast(this.presenter.getHelloMessage())
     }
 
     override fun getGitHubUserInfo(username: String) {
         this.presenter.fetchUserInfo(username).observe(this, Observer {
-
         })
     }
 

@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.login
+package com.bluecat.githubfeed.persistence
 
-import com.bluecat.core.BaseView
+import com.bluecat.githubfeed.login.LoginPresenter
+import com.skydoves.preferenceroom.PreferenceComponent
 
-interface LoginActivityView : BaseView {
-    fun onLoginSuccess(name: String?)
-    fun onLoginFailure(state: String?, needOTP: Boolean)
+@PreferenceComponent(entities = [UserInfo::class])
+interface PrefComponent {
+    fun inject(target__: LoginPresenter)
 }
