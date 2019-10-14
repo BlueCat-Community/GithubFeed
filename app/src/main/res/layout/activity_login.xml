@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <EditText
+            android:hint="여긴아이디"
+        android:id="@+id/idBox"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"/>
+        <EditText
+            android:hint="여긴비밀번호"
+            android:layout_below="@+id/idBox"
+            android:id="@+id/pwBox"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/pwBox"
+            android:text="LOGIN"
+            android:id="@+id/loginButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+</RelativeLayout>

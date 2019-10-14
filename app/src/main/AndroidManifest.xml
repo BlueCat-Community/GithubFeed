@@ -21,6 +21,7 @@ package="com.bluecat.githubfeed">
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
+    <activity android:name=".login.LoginActivity" />
     <activity android:name=".main.MainActivity" />
 </application>
 </manifest>

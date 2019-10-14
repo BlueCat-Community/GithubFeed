@@ -16,12 +16,13 @@
 
 package com.bluecat.githubfeed.main
 
+import android.content.pm.ActivityInfo
+import android.os.Build
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.bluecat.core.BaseActivity
 import com.bluecat.core.qualifiers.RequirePresenter
 import com.bluecat.githubfeed.R
-import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
 
 @RequirePresenter(MainPresenter::class)
@@ -38,13 +39,21 @@ class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
     }
 
     override fun initializeUI() {
-        text_hello.text = this.presenter.getHelloMessage()
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        supportActionBar?.hide()
+        window.statusBarColor = resources.getColor(R.color.splash_statusbar_color)
         toast(this.presenter.getHelloMessage())
     }
 
     override fun getGitHubUserInfo(username: String) {
         this.presenter.fetchUserInfo(username).observe(this, Observer {
-            text_hello.text = it.toString()
+
         })
+    }
+
+    override fun setRequestedOrientation(requestedOrientation: Int) {
+        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.O) {
+            super.setRequestedOrientation(requestedOrientation)
+        }
     }
 }
