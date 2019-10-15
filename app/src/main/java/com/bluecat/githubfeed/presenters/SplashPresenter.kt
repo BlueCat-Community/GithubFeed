@@ -25,6 +25,6 @@ import timber.log.Timber
 class SplashPresenter : BasePresenter<SplashActivityView>() {
     init {
         Timber.d("Initialize SplashPresenter.")
-        Handler(Looper.getMainLooper()).postDelayed({ baseView.moveMain() }, 1000)
+        Handler(Looper.getMainLooper()).postDelayed({ baseView.moveLogin() }, 1000)
     }
 }

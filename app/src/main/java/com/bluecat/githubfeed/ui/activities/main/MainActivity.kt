@@ -20,6 +20,7 @@ import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import androidx.lifecycle.Observer
+import androidx.viewpager.widget.ViewPager
 import com.bluecat.core.BaseActivity
 import com.bluecat.core.qualifiers.RequirePresenter
 import com.bluecat.githubfeed.R
@@ -40,9 +41,6 @@ class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
         setContentView(R.layout.activity_main)
         initBaseView(this)
 
-        pagerAdapter = MainPagerAdapter(supportFragmentManager)
-        viewPager.adapter = pagerAdapter
-//TODO
         // fetch user information
         getGitHubUserInfo("skydoves")
     }
@@ -52,20 +50,7 @@ class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
         supportActionBar?.hide()
         window.statusBarColor = resources.getColor(R.color.splash_statusbar_color)
 
-        bottom_navigation_view.setOnNavigationItemSelectedListener {
-            val transaction = supportFragmentManager.beginTransaction()
-
-            /** 프레그먼트 관리는 View에서할지 Presenter에서 할지 모르겠다.*/
-
-            return@setOnNavigationItemSelectedListener when (it.itemId) {
-                R.id.menu_feed -> {
-                    //TODO
-                    true
-                }
-                else -> false
-            }
-
-        }
+        setViewPager()
 
         toast(this.presenter.getHelloMessage())
     }
@@ -74,6 +59,47 @@ class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
         this.presenter.fetchUserInfo(username).observe(this, Observer {
 
         })
+    }
+
+    private fun setViewPager() {
+
+        /** Set View pager adapter */
+        pagerAdapter = MainPagerAdapter(supportFragmentManager)
+        viewPager.adapter = pagerAdapter
+
+        /** Set View pager */
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {}
+
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+            }
+
+            override fun onPageSelected(position: Int) {
+                bottom_navigation_view.menu.getItem(position).isChecked = true
+            }
+        })
+
+
+        /** Set Bottom navigation */
+        bottom_navigation_view.setOnNavigationItemSelectedListener {
+            viewPager.currentItem = when (it.itemId) {
+                R.id.menu_feed -> 0
+
+                R.id.menu_2 -> 1
+
+                R.id.menu_3 -> 2
+
+                R.id.menu_4 -> 3
+
+                else -> 0
+            }
+            true
+        }
+
     }
 
     override fun setRequestedOrientation(requestedOrientation: Int) {

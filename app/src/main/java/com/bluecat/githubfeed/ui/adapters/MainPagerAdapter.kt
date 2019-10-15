@@ -23,15 +23,16 @@ import com.bluecat.githubfeed.ui.fragments.FeedFragment
 
 class MainPagerAdapter(fm : FragmentManager):FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    // TODO
+
     override fun getItem(position: Int): Fragment {
         return when(position)
         {
             0-> FeedFragment()
-            else -> FeedFragment()
+            1-> FeedFragment() // Test
+            else -> FeedFragment() // Test
         }
     }
 
-    override fun getCount() = 1
+    override fun getCount() = 4
 
 }

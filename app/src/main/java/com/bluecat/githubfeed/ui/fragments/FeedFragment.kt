@@ -21,6 +21,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bluecat.githubfeed.R
 
 class FeedFragment:Fragment() {
 
@@ -30,6 +31,8 @@ class FeedFragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+
+        // TEST
+        return inflater.inflate(R.layout.fragment_feed, container,false)
     }
 }
