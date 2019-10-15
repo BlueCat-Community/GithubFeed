@@ -20,16 +20,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.bluecat.githubfeed.ui.fragments.FeedFragment
+import com.bluecat.githubfeed.ui.fragments.TestFragment
 
-class MainPagerAdapter(fm : FragmentManager):FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class MainPagerAdapter(fm: FragmentManager) :
+    FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
 
     override fun getItem(position: Int): Fragment {
-        return when(position)
-        {
-            0-> FeedFragment()
-            1-> FeedFragment() // Test
-            else -> FeedFragment() // Test
+        return when (position) {
+            0 -> FeedFragment()
+            1 -> TestFragment() // Test
+            2 -> TestFragment() // Test
+            else -> TestFragment() // Test
         }
     }
 
