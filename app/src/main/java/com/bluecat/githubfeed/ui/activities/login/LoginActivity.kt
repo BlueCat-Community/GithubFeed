@@ -16,6 +16,8 @@
 
 package com.bluecat.githubfeed.ui.activities.login
 
+import android.content.pm.ActivityInfo
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -37,6 +39,10 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
     }
 
     override fun initializeUI() {
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        supportActionBar?.hide()
+        window.statusBarColor = resources.getColor(R.color.splash_statusbar_color)
+
         OTPEdit.visibility = View.GONE
 
         loginBtn.setOnClickListener {
@@ -56,6 +62,12 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
         Toast.makeText(this, "Login Failure : $state", Toast.LENGTH_SHORT).show()
         if (needOTP) {
             OTPEdit.visibility = View.VISIBLE
+        }
+    }
+
+    override fun setRequestedOrientation(requestedOrientation: Int) {
+        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.O) {
+            super.setRequestedOrientation(requestedOrientation)
         }
     }
 }

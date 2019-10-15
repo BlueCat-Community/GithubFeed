@@ -2,18 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:icon="@android:drawable/ic_dialog_info"
+        android:enabled="true"
         android:id="@+id/menu_feed"
         android:title="Feed" />
 
     <item
+        android:icon="@android:drawable/ic_dialog_alert"
+        android:enabled="true"
         android:id="@+id/menu_2"
         android:title="MENU2" />
 
     <item
+        android:icon="@android:drawable/ic_dialog_dialer"
+        android:enabled="true"
         android:id="@+id/menu_3"
         android:title="MENU3" />
 
     <item
+        android:icon="@android:drawable/ic_dialog_email"
+        android:enabled="true"
         android:id="@+id/menu_4"
         android:title="MENU3" />
 

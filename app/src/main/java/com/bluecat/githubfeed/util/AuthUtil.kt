@@ -13,7 +13,7 @@ object AuthUtil {
     }
 
     fun getFailureCause(message: String?): Int {
-        val cause = JSONObject(message).get("message") as String
+        val cause = JSONObject(message?:"{}").get("message") as String
         return when (cause.contains("OTP")) {
             true -> NEED_TWO_FACTOR
             false -> BAD_CREDENTIAL

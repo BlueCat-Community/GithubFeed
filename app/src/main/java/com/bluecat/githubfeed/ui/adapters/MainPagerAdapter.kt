@@ -29,8 +29,6 @@ class MainPagerAdapter(fm: FragmentManager) :
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> FeedFragment()
-            1 -> TestFragment() // Test
-            2 -> TestFragment() // Test
             else -> TestFragment() // Test
         }
     }

@@ -28,6 +28,7 @@ import com.bluecat.githubfeed.ui.activities.login.LoginActivity
 import com.bluecat.githubfeed.ui.activities.main.MainActivity
 import com.bluecat.githubfeed.viewTypes.SplashActivityView
 
+@Suppress("DEPRECATION")
 @RequirePresenter(SplashPresenter::class)
 class SplashActivity : BaseActivity<SplashPresenter, SplashActivityView>(),
     SplashActivityView {

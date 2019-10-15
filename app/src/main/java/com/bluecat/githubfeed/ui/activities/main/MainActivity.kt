@@ -30,11 +30,10 @@ import com.bluecat.githubfeed.viewTypes.MainActivityView
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
 
+@Suppress("DEPRECATION")
 @RequirePresenter(MainPresenter::class)
 class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
     MainActivityView {
-
-    private lateinit var pagerAdapter: MainPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,13 +63,11 @@ class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
     private fun setViewPager() {
 
         /** Set View pager adapter */
-        pagerAdapter = MainPagerAdapter(supportFragmentManager)
-        viewPager.adapter = pagerAdapter
+        viewPager.adapter = MainPagerAdapter(supportFragmentManager)
 
         /** Set View pager */
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {}
-
+            override fun onPageScrollStateChanged(state: Int) = Unit
             override fun onPageScrolled(
                 position: Int,
                 positionOffset: Float,
@@ -83,7 +80,7 @@ class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
             }
         })
 
-
+        bottom_navigation_view
         /** Set Bottom navigation */
         bottom_navigation_view.setOnNavigationItemSelectedListener {
             viewPager.currentItem = when (it.itemId) {
