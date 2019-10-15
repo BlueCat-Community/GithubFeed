@@ -14,25 +14,25 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.util
+package com.bluecat.githubfeed.ui.fragments
 
-import android.util.Base64
-import org.json.JSONObject
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.bluecat.githubfeed.R
 
-object AuthUtil {
+class FeedFragment:Fragment() {
 
-    const val BAD_CREDENTIAL = 0
-    const val NEED_TWO_FACTOR = 1
+    //TODO
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-    fun basic(username: String, password: String): String {
-        return "Basic " + Base64.encodeToString("$username:$password".toByteArray(), Base64.NO_WRAP)
-    }
-
-    fun getFailureCause(message: String?): Int {
-        val cause = JSONObject(message?:"{}").get("message") as String
-        return when (cause.contains("OTP")) {
-            true -> NEED_TWO_FACTOR
-            false -> BAD_CREDENTIAL
-        }
+        // TEST
+        return inflater.inflate(R.layout.fragment_feed, container,false)
     }
 }

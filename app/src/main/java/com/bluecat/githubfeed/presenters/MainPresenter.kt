@@ -14,17 +14,20 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.main
+package com.bluecat.githubfeed.presenters
 
 import androidx.lifecycle.LiveData
 import com.bluecat.core.BasePresenter
 import com.bluecat.githubfeed.api.ApiResponse
 import com.bluecat.githubfeed.api.NetworkModule
 import com.bluecat.githubfeed.model.GithubUser
+import com.bluecat.githubfeed.viewTypes.MainActivityView
 import timber.log.Timber
 
 class MainPresenter : BasePresenter<MainActivityView>() {
 
+
+    //TODO
     private val usersService = NetworkModule.userService
 
     init {

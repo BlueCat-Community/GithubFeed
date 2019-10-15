@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.splash
+package com.bluecat.githubfeed.viewTypes
 
 import com.bluecat.core.BaseView
 
 interface SplashActivityView : BaseView {
-    fun moveMain()
+    fun moveLogin()
 }

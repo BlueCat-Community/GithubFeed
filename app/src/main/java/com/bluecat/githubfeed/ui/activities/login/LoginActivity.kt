@@ -14,18 +14,24 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.login
+package com.bluecat.githubfeed.ui.activities.login
 
+import android.content.pm.ActivityInfo
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.bluecat.core.BaseActivity
 import com.bluecat.core.qualifiers.RequirePresenter
 import com.bluecat.githubfeed.R
+import com.bluecat.githubfeed.presenters.LoginPresenter
+import com.bluecat.githubfeed.viewTypes.LoginActivityView
 import kotlinx.android.synthetic.main.activity_login.*
 
+@Suppress("DEPRECATION")
 @RequirePresenter(LoginPresenter::class)
-class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(), LoginActivityView {
+class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
+    LoginActivityView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +40,10 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(), LoginAc
     }
 
     override fun initializeUI() {
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        supportActionBar?.hide()
+        window.statusBarColor = resources.getColor(R.color.splash_statusbar_color)
+
         OTPEdit.visibility = View.GONE
 
         loginBtn.setOnClickListener {
@@ -53,6 +63,12 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(), LoginAc
         Toast.makeText(this, "Login Failure : $state", Toast.LENGTH_SHORT).show()
         if (needOTP) {
             OTPEdit.visibility = View.VISIBLE
+        }
+    }
+
+    override fun setRequestedOrientation(requestedOrientation: Int) {
+        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.O) {
+            super.setRequestedOrientation(requestedOrientation)
         }
     }
 }

@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.main
+package com.bluecat.githubfeed.viewTypes
 
 import com.bluecat.core.BaseView
 
-interface MainActivityView : BaseView {
-    fun getGitHubUserInfo(username: String)
+interface LoginActivityView : BaseView {
+    fun onLoginSuccess(name: String?)
+    fun onLoginFailure(state: String?, needOTP: Boolean)
 }

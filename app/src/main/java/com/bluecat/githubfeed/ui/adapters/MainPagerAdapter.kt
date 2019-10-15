@@ -14,16 +14,25 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.splash
+package com.bluecat.githubfeed.ui.adapters
 
-import android.os.Handler
-import android.os.Looper
-import com.bluecat.core.BasePresenter
-import timber.log.Timber
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import com.bluecat.githubfeed.ui.fragments.FeedFragment
+import com.bluecat.githubfeed.ui.fragments.TestFragment
 
-class SplashPresenter : BasePresenter<SplashActivityView>() {
-    init {
-        Timber.d("Initialize SplashPresenter.")
-        Handler(Looper.getMainLooper()).postDelayed({ baseView.moveMain() }, 1000)
+class MainPagerAdapter(fm: FragmentManager) :
+    FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+
+
+    override fun getItem(position: Int): Fragment {
+        return when (position) {
+            0 -> FeedFragment()
+            else -> TestFragment() // Test
+        }
     }
+
+    override fun getCount() = 4
+
 }

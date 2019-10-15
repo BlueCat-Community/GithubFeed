@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.login
+package com.bluecat.githubfeed.presenters
 
 import android.util.Log
 import androidx.lifecycle.Observer
@@ -23,6 +23,7 @@ import com.bluecat.githubfeed.api.NetworkModule
 import com.bluecat.githubfeed.persistence.PreferenceComponent_PrefComponent
 import com.bluecat.githubfeed.persistence.Preference_UserInfo
 import com.bluecat.githubfeed.util.AuthUtil
+import com.bluecat.githubfeed.viewTypes.LoginActivityView
 import com.skydoves.preferenceroom.InjectPreference
 import timber.log.Timber
 

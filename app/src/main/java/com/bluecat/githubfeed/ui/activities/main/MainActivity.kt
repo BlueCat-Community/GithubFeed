@@ -14,18 +14,24 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.main
+package com.bluecat.githubfeed.ui.activities.main
 
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import androidx.viewpager.widget.ViewPager
 import com.bluecat.core.BaseActivity
 import com.bluecat.core.qualifiers.RequirePresenter
 import com.bluecat.githubfeed.R
+import com.bluecat.githubfeed.presenters.MainPresenter
+import com.bluecat.githubfeed.ui.adapters.MainPagerAdapter
+import com.bluecat.githubfeed.viewTypes.MainActivityView
+import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
 
+@Suppress("DEPRECATION")
 @RequirePresenter(MainPresenter::class)
 class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
     MainActivityView {
@@ -42,13 +48,55 @@ class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
     override fun initializeUI() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         supportActionBar?.hide()
-        window.statusBarColor = ContextCompat.getColor(this, R.color.splash_statusbar_color)
+        window.statusBarColor = resources.getColor(R.color.splash_statusbar_color)
+
+        setViewPager()
+
         toast(this.presenter.getHelloMessage())
     }
 
     override fun getGitHubUserInfo(username: String) {
         this.presenter.fetchUserInfo(username).observe(this, Observer {
         })
+    }
+
+    private fun setViewPager() {
+
+        /** Set View pager adapter */
+        viewPager.adapter = MainPagerAdapter(supportFragmentManager)
+
+        /** Set View pager */
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) = Unit
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+            }
+
+            override fun onPageSelected(position: Int) {
+                bottom_navigation_view.menu.getItem(position).isChecked = true
+            }
+        })
+
+        bottom_navigation_view
+        /** Set Bottom navigation */
+        bottom_navigation_view.setOnNavigationItemSelectedListener {
+            viewPager.currentItem = when (it.itemId) {
+                R.id.menu_feed -> 0
+
+                R.id.menu_2 -> 1
+
+                R.id.menu_3 -> 2
+
+                R.id.menu_4 -> 3
+
+                else -> 0
+            }
+            true
+        }
+
     }
 
     override fun setRequestedOrientation(requestedOrientation: Int) {

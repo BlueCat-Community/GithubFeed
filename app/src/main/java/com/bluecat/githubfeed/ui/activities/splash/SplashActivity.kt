@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.splash
+package com.bluecat.githubfeed.ui.activities.splash
 
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -23,10 +23,15 @@ import android.os.Bundle
 import com.bluecat.core.BaseActivity
 import com.bluecat.core.qualifiers.RequirePresenter
 import com.bluecat.githubfeed.R
-import com.bluecat.githubfeed.login.LoginActivity
+import com.bluecat.githubfeed.presenters.SplashPresenter
+import com.bluecat.githubfeed.ui.activities.login.LoginActivity
+import com.bluecat.githubfeed.ui.activities.main.MainActivity
+import com.bluecat.githubfeed.viewTypes.SplashActivityView
 
+@Suppress("DEPRECATION")
 @RequirePresenter(SplashPresenter::class)
-class SplashActivity : BaseActivity<SplashPresenter, SplashActivityView>(), SplashActivityView {
+class SplashActivity : BaseActivity<SplashPresenter, SplashActivityView>(),
+    SplashActivityView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +45,10 @@ class SplashActivity : BaseActivity<SplashPresenter, SplashActivityView>(), Spla
         window.statusBarColor = resources.getColor(R.color.splash_statusbar_color)
     }
 
-    override fun moveMain() {
-        startActivity(Intent(this, LoginActivity::class.java))
+    override fun moveLogin() {
+        //TEST
+        //startActivity(Intent(this, LoginActivity::class.java))
+        startActivity(Intent(this, MainActivity::class.java))
         overridePendingTransition(R.anim.abc_fade_in, R.anim.not_move_activity)
         finish()
     }
