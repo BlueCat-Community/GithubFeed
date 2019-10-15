@@ -26,13 +26,14 @@ import com.bluecat.githubfeed.R
 import com.bluecat.githubfeed.presenters.MainPresenter
 import com.bluecat.githubfeed.ui.adapters.MainPagerAdapter
 import com.bluecat.githubfeed.viewTypes.MainActivityView
+import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
 
 @RequirePresenter(MainPresenter::class)
 class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
     MainActivityView {
 
-    private  lateinit var pagerAdapter:MainPagerAdapter
+    private lateinit var pagerAdapter: MainPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +41,8 @@ class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
         initBaseView(this)
 
         pagerAdapter = MainPagerAdapter(supportFragmentManager)
-
+        viewPager.adapter = pagerAdapter
+//TODO
         // fetch user information
         getGitHubUserInfo("skydoves")
     }
@@ -49,6 +51,22 @@ class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         supportActionBar?.hide()
         window.statusBarColor = resources.getColor(R.color.splash_statusbar_color)
+
+        bottom_navigation_view.setOnNavigationItemSelectedListener {
+            val transaction = supportFragmentManager.beginTransaction()
+
+            /** 프레그먼트 관리는 View에서할지 Presenter에서 할지 모르겠다.*/
+
+            return@setOnNavigationItemSelectedListener when (it.itemId) {
+                R.id.menu_feed -> {
+                    //TODO
+                    true
+                }
+                else -> false
+            }
+
+        }
+
         toast(this.presenter.getHelloMessage())
     }
 

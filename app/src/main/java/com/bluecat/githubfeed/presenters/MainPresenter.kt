@@ -26,6 +26,8 @@ import timber.log.Timber
 
 class MainPresenter : BasePresenter<MainActivityView>() {
 
+
+    //TODO
     private val usersService = NetworkModule.userService
 
     init {
