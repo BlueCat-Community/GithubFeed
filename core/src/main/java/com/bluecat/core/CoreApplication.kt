@@ -14,10 +14,20 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.viewTypes
+package com.bluecat.core
 
-import com.bluecat.core.BaseView
+import android.app.Application
 
-interface SplashActivityView : BaseView {
-    fun moveLogin()
+import timber.log.Timber
+
+open class CoreApplication : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+
+        // initialize Timber
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
+    }
 }

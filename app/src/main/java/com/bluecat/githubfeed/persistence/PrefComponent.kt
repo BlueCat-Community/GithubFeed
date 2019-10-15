@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.viewTypes
+package com.bluecat.githubfeed.persistence
 
-import com.bluecat.core.BaseView
+import com.bluecat.githubfeed.login.LoginPresenter
+import com.skydoves.preferenceroom.PreferenceComponent
 
-interface SplashActivityView : BaseView {
-    fun moveLogin()
+@PreferenceComponent(entities = [UserInfo::class])
+interface PrefComponent {
+    fun inject(target__: LoginPresenter)
 }

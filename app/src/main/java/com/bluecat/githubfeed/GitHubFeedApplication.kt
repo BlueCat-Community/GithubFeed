@@ -14,22 +14,18 @@
  * limitations under the License.
  */
 
-package com.bluecat.core
+package com.bluecat.githubfeed
 
-import android.app.Application
+import com.bluecat.core.CoreApplication
+import com.bluecat.githubfeed.persistence.PreferenceComponent_PrefComponent
 
-//Reference Error
-//import com.skydoves.core.BuildConfig
-import timber.log.Timber
-
-class GithubFeedApplication : Application() {
+@Suppress("unused")
+class GitHubFeedApplication : CoreApplication() {
 
     override fun onCreate() {
         super.onCreate()
 
-        // initialize Timber
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        }
+        // initialize PreferenceRoom
+        PreferenceComponent_PrefComponent.init(this)
     }
 }

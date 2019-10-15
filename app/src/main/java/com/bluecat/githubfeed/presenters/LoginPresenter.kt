@@ -16,36 +16,50 @@
 
 package com.bluecat.githubfeed.presenters
 
-import androidx.lifecycle.LifecycleOwner
+import android.util.Log
 import androidx.lifecycle.Observer
 import com.bluecat.core.BasePresenter
 import com.bluecat.githubfeed.api.NetworkModule
+import com.bluecat.githubfeed.persistence.PreferenceComponent_PrefComponent
+import com.bluecat.githubfeed.persistence.Preference_UserInfo
 import com.bluecat.githubfeed.util.AuthUtil
 import com.bluecat.githubfeed.viewTypes.LoginActivityView
 import timber.log.Timber
 
 class LoginPresenter : BasePresenter<LoginActivityView>() {
+
     private val loginService = NetworkModule.loginService
+
+    @InjectPreference
+    lateinit var userInfo: Preference_UserInfo
 
     init {
         Timber.d("Initialize LoginPresenter.")
+        PreferenceComponent_PrefComponent.getInstance().inject(this)
+        Log.e("Test", userInfo.token)
     }
 
-    fun authenticateUser(username: String, password: String, otpCode: String?) {
-        this.loginService.authenticateUser(AuthUtil.basic(username, password), otpCode)
-            .observe(this.baseView as LifecycleOwner,
+    fun authenticateUser(username: String, password: String, otpCode: String) {
+        val token = AuthUtil.basic(username, password)
+        this.loginService.authenticateUser(token, otpCode)
+            .observe(this.baseView,
                 Observer {
                     when {
-                        it.isSuccessful -> this.baseView.onLoginSuccess(it.body?.name)
-                        it.code in 400..500 -> when (AuthUtil.getFailureCause(it.message)) {
-                            AuthUtil.BAD_CREDENTIAL -> this.baseView.onLoginFailure(
-                                "Sign in failed",
-                                false
-                            )
-                            AuthUtil.NEED_TWO_FACTOR -> this.baseView.onLoginFailure(
-                                "Two factors OTP is required",
-                                true
-                            )
+                        it.isSuccessful -> {
+                            this.baseView.onLoginSuccess(it.body?.name)
+                            this.userInfo.putToken(token)
+                        }
+                        it.code in 400..500 -> it.message?.let { message ->
+                            when (AuthUtil.getFailureCause(message)) {
+                                AuthUtil.BAD_CREDENTIAL -> this.baseView.onLoginFailure(
+                                    "Sign in failed",
+                                    false
+                                )
+                                AuthUtil.NEED_TWO_FACTOR -> this.baseView.onLoginFailure(
+                                    "Two factors OTP is required",
+                                    true
+                                )
+                            }
                         }
                         else -> this.baseView.onLoginFailure("Unknown error", false)
                     }

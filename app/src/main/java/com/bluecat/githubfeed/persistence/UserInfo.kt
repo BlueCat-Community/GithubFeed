@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.viewTypes
+package com.bluecat.githubfeed.persistence
 
-import com.bluecat.core.BaseView
+import com.skydoves.preferenceroom.PreferenceEntity
 
-interface SplashActivityView : BaseView {
-    fun moveLogin()
+@PreferenceEntity
+open class UserInfo {
+    @JvmField
+    val token: String = ""
 }

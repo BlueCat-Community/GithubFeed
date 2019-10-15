@@ -19,6 +19,7 @@ package com.bluecat.githubfeed.ui.activities.main
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import com.bluecat.core.BaseActivity
@@ -56,7 +57,6 @@ class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
 
     override fun getGitHubUserInfo(username: String) {
         this.presenter.fetchUserInfo(username).observe(this, Observer {
-
         })
     }
 
