@@ -24,6 +24,7 @@ import com.bluecat.githubfeed.persistence.PreferenceComponent_PrefComponent
 import com.bluecat.githubfeed.persistence.Preference_UserInfo
 import com.bluecat.githubfeed.util.AuthUtil
 import com.bluecat.githubfeed.viewTypes.LoginActivityView
+import com.skydoves.preferenceroom.InjectPreference
 import timber.log.Timber
 
 class LoginPresenter : BasePresenter<LoginActivityView>() {

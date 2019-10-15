@@ -28,6 +28,7 @@ import com.bluecat.githubfeed.presenters.LoginPresenter
 import com.bluecat.githubfeed.viewTypes.LoginActivityView
 import kotlinx.android.synthetic.main.activity_login.*
 
+@Suppress("DEPRECATION")
 @RequirePresenter(LoginPresenter::class)
 class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
     LoginActivityView {

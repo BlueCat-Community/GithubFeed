@@ -16,7 +16,7 @@
 
 package com.bluecat.githubfeed.persistence
 
-import com.bluecat.githubfeed.login.LoginPresenter
+import com.bluecat.githubfeed.presenters.LoginPresenter
 import com.skydoves.preferenceroom.PreferenceComponent
 
 @PreferenceComponent(entities = [UserInfo::class])
