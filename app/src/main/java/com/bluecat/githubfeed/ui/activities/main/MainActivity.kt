@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.main
+package com.bluecat.githubfeed.ui.activities.main
 
 import android.content.pm.ActivityInfo
 import android.os.Build
@@ -23,16 +23,23 @@ import androidx.lifecycle.Observer
 import com.bluecat.core.BaseActivity
 import com.bluecat.core.qualifiers.RequirePresenter
 import com.bluecat.githubfeed.R
+import com.bluecat.githubfeed.presenters.MainPresenter
+import com.bluecat.githubfeed.ui.adapters.MainPagerAdapter
+import com.bluecat.githubfeed.viewTypes.MainActivityView
 import org.jetbrains.anko.toast
 
 @RequirePresenter(MainPresenter::class)
 class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
     MainActivityView {
 
+    private  lateinit var pagerAdapter:MainPagerAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initBaseView(this)
+
+        pagerAdapter = MainPagerAdapter(supportFragmentManager)
 
         // fetch user information
         getGitHubUserInfo("skydoves")

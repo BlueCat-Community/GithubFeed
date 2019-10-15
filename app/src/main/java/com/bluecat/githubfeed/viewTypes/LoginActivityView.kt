@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.splash
+package com.bluecat.githubfeed.viewTypes
 
 import com.bluecat.core.BaseView
 
-interface SplashActivityView : BaseView {
-    fun moveMain()
+interface LoginActivityView : BaseView {
+    fun onLoginSuccess(name: String?)
+    fun onLoginFailure(state: String?, needOTP: Boolean)
 }

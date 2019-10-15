@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.splash
+package com.bluecat.githubfeed.ui.activities.splash
 
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -23,10 +23,13 @@ import android.os.Bundle
 import com.bluecat.core.BaseActivity
 import com.bluecat.core.qualifiers.RequirePresenter
 import com.bluecat.githubfeed.R
-import com.bluecat.githubfeed.login.LoginActivity
+import com.bluecat.githubfeed.presenters.SplashPresenter
+import com.bluecat.githubfeed.ui.activities.login.LoginActivity
+import com.bluecat.githubfeed.viewTypes.SplashActivityView
 
 @RequirePresenter(SplashPresenter::class)
-class SplashActivity : BaseActivity<SplashPresenter, SplashActivityView>(), SplashActivityView {
+class SplashActivity : BaseActivity<SplashPresenter, SplashActivityView>(),
+    SplashActivityView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

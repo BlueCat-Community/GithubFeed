@@ -14,28 +14,17 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.main
+package com.bluecat.githubfeed.presenters
 
-import androidx.lifecycle.LiveData
+import android.os.Handler
+import android.os.Looper
 import com.bluecat.core.BasePresenter
-import com.bluecat.githubfeed.api.ApiResponse
-import com.bluecat.githubfeed.api.NetworkModule
-import com.bluecat.githubfeed.model.GithubUser
+import com.bluecat.githubfeed.viewTypes.SplashActivityView
 import timber.log.Timber
 
-class MainPresenter : BasePresenter<MainActivityView>() {
-
-    private val usersService = NetworkModule.userService
-
+class SplashPresenter : BasePresenter<SplashActivityView>() {
     init {
-        Timber.d("Initialize MainPresenter.")
-    }
-
-    fun getHelloMessage(): String {
-        return "hello, GitHub Feed!"
-    }
-
-    fun fetchUserInfo(username: String): LiveData<ApiResponse<GithubUser>> {
-        return this.usersService.fetchUser(username)
+        Timber.d("Initialize SplashPresenter.")
+        Handler(Looper.getMainLooper()).postDelayed({ baseView.moveMain() }, 1000)
     }
 }
