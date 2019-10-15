@@ -3,8 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 <TextView
-    android:layout_centerInParent="true"
+    android:id="@+id/testInformation"
+   android:layout_alignParentTop="true"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="프레그먼트"/>
+    android:text="GitHub Fedd  ʕ•̫͡•ʕ•̫͡•ʔ•̫͡•ʔ•̫͡•ʕ•̫͡•ʔ"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_recyclerview"
+        android:layout_below="@+id/testInformation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </RelativeLayout>

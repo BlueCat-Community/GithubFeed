@@ -72,15 +72,13 @@ class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
                 position: Int,
                 positionOffset: Float,
                 positionOffsetPixels: Int
-            ) {
-            }
+            ) = Unit
 
             override fun onPageSelected(position: Int) {
                 bottom_navigation_view.menu.getItem(position).isChecked = true
             }
         })
 
-        bottom_navigation_view
         /** Set Bottom navigation */
         bottom_navigation_view.setOnNavigationItemSelectedListener {
             viewPager.currentItem = when (it.itemId) {

@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+
+//TESTING
 package com.bluecat.githubfeed.ui.fragments
 
 import android.os.Bundle
@@ -21,18 +23,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bluecat.githubfeed.R
+import com.bluecat.githubfeed.model.TestData
+import com.bluecat.githubfeed.ui.adapters.FeedRecyclerViewAdapter
+import kotlinx.android.synthetic.main.fragment_feed.view.*
 
-class FeedFragment:Fragment() {
+class FeedFragment : Fragment() {
 
-    //TODO
+    private var rootView: View? = null
+    private lateinit var testList: ArrayList<TestData>
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        rootView = inflater.inflate(R.layout.fragment_feed, container, false)
 
-        // TEST
-        return inflater.inflate(R.layout.fragment_feed, container,false)
+        initializeUI()
+
+        return rootView
     }
+
+    private fun initializeUI() = rootView?.also {
+        testList = ArrayList()
+        for (r in 0..22) {
+            testList.add(TestData("${r}:TESTDATA"))
+        }
+        it.main_recyclerview.adapter = FeedRecyclerViewAdapter(testList)
+        it.main_recyclerview.layoutManager = LinearLayoutManager(context)
+        // TODO
+    }
+
 }
