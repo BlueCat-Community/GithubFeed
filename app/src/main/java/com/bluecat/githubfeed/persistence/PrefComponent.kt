@@ -17,9 +17,11 @@
 package com.bluecat.githubfeed.persistence
 
 import com.bluecat.githubfeed.presenters.LoginPresenter
+import com.bluecat.githubfeed.presenters.MainPresenter
 import com.skydoves.preferenceroom.PreferenceComponent
 
 @PreferenceComponent(entities = [UserInfo::class])
 interface PrefComponent {
     fun inject(target__: LoginPresenter)
+    fun inject(target__: MainPresenter)
 }
