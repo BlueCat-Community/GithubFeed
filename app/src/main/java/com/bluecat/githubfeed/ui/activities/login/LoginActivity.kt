@@ -16,6 +16,7 @@
 
 package com.bluecat.githubfeed.ui.activities.login
 
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
@@ -25,6 +26,7 @@ import com.bluecat.core.BaseActivity
 import com.bluecat.core.qualifiers.RequirePresenter
 import com.bluecat.githubfeed.R
 import com.bluecat.githubfeed.presenters.LoginPresenter
+import com.bluecat.githubfeed.ui.activities.main.MainActivity
 import com.bluecat.githubfeed.viewTypes.LoginActivityView
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -57,6 +59,9 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
 
     override fun onLoginSuccess(name: String?) {
         Toast.makeText(this, "안녕하세요. $name 님.", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this, MainActivity::class.java))
+        overridePendingTransition(R.anim.abc_fade_in, R.anim.not_move_activity)
+        // finish()
     }
 
     override fun onLoginFailure(state: String?, needOTP: Boolean) {

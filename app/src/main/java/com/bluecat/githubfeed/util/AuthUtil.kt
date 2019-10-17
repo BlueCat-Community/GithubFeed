@@ -17,6 +17,7 @@
 package com.bluecat.githubfeed.util
 
 import android.util.Base64
+import android.util.Log
 import org.json.JSONObject
 
 object AuthUtil {
@@ -29,6 +30,7 @@ object AuthUtil {
     }
 
     fun getFailureCause(message: String?): Int {
+        Log.d("TEST", message?:"asdf")
         val cause = JSONObject(message?:"{}").get("message") as String
         return when (cause.contains("OTP")) {
             true -> NEED_TWO_FACTOR

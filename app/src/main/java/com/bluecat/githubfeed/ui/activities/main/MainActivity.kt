@@ -42,7 +42,7 @@ class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
         initBaseView(this)
 
         // fetch user information
-        getGitHubUserInfo("skydoves")
+        //getGitHubUserInfo("skydoves")
     }
 
     override fun initializeUI() {
@@ -53,6 +53,9 @@ class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
         setViewPager()
 
         toast(this.presenter.getHelloMessage())
+
+        // TEST
+        testingsss.text = presenter.userInfo.TokenKeyName()
     }
 
     override fun getGitHubUserInfo(username: String) {

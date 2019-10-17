@@ -36,6 +36,7 @@ class MainPresenter : BasePresenter<MainActivityView>() {
     init {
         PreferenceComponent_PrefComponent.getInstance().inject(this)
         Timber.d("Initialize MainPresenter.")
+
     }
 
     fun getHelloMessage(): String {
