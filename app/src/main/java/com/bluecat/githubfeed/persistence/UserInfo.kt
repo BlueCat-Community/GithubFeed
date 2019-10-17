@@ -22,4 +22,7 @@ import com.skydoves.preferenceroom.PreferenceEntity
 open class UserInfo {
     @JvmField
     val token: String = ""
+
+    @JvmField
+    val username: String? = ""
 }

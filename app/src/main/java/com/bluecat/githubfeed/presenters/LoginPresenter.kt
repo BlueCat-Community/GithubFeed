@@ -31,13 +31,8 @@ class LoginPresenter : BasePresenter<LoginActivityView>() {
 
     private val loginService = NetworkModule.loginService
 
-    @InjectPreference
-    lateinit var userInfo: Preference_UserInfo
-
     init {
         Timber.d("Initialize LoginPresenter.")
-        PreferenceComponent_PrefComponent.getInstance().inject(this)
-        Log.e("Test", userInfo.token)
     }
 
     fun authenticateUser(username: String, password: String, otpCode: String) {
@@ -47,8 +42,8 @@ class LoginPresenter : BasePresenter<LoginActivityView>() {
                 Observer {
                     when {
                         it.isSuccessful -> {
+                            AuthUtil.login(token, it.body?.name)
                             this.baseView.onLoginSuccess(it.body?.name)
-                            this.userInfo.putToken(token)
                         }
                         it.code in 400..500 -> it.message?.let { message ->
                             when (AuthUtil.getFailureCause(message)) {
@@ -65,5 +60,20 @@ class LoginPresenter : BasePresenter<LoginActivityView>() {
                         else -> this.baseView.onLoginFailure("Unknown error", false)
                     }
                 })
+    }
+
+    fun checkLoginSession() {
+        when (AuthUtil.hasLoginSession()) {
+            true -> this.baseView.onLoginSuccess(AuthUtil.sessionUsername())
+        }
+    }
+
+    fun logout() {
+        when (AuthUtil.logout()) {
+            true -> this.baseView.onLogoutSuccess()
+            else -> {
+                Timber.d("Logout failed")
+            }
+        }
     }
 }
