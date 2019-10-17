@@ -59,8 +59,8 @@ object AuthUtil {
     }
 
     fun logout(): Boolean {
-        userInfo.putToken("")
-        userInfo.putUsername("")
+        userInfo.removeToken()
+        userInfo.removeUsername()
         return when (userInfo.token) {
             "" -> true
             else -> false
