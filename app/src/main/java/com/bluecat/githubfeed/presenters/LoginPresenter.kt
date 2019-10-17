@@ -16,7 +16,6 @@
 
 package com.bluecat.githubfeed.presenters
 
-import android.util.Log
 import androidx.lifecycle.Observer
 import com.bluecat.core.BasePresenter
 import com.bluecat.githubfeed.api.NetworkModule
@@ -29,9 +28,11 @@ import timber.log.Timber
 
 class LoginPresenter : BasePresenter<LoginActivityView>() {
 
+
     private val loginService = NetworkModule.loginService
 
     init {
+        PreferenceComponent_PrefComponent.getInstance().inject(this)
         Timber.d("Initialize LoginPresenter.")
     }
 

@@ -55,7 +55,7 @@ class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
         toast(this.presenter.getHelloMessage())
 
         // TEST
-        testingsss.text = presenter.userInfo.TokenKeyName()
+        testingsss.text = presenter.userInfo.username
     }
 
     override fun getGitHubUserInfo(username: String) {

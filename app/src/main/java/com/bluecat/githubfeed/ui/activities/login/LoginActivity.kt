@@ -68,7 +68,9 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
         passwordEdit.isEnabled = false
         loginBtn.isEnabled = false
         logoutBtn.visibility = View.VISIBLE
-
+        startActivity(Intent(this, MainActivity::class.java))
+        overridePendingTransition(R.anim.abc_fade_in, R.anim.not_move_activity)
+        //finish()
     }
 
     override fun onLoginFailure(state: String?, needOTP: Boolean) {
