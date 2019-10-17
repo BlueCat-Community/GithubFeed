@@ -46,6 +46,7 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
         supportActionBar?.hide()
         window.statusBarColor = resources.getColor(R.color.splash_statusbar_color)
 
+        presenter.checkLoginSession()
         OTPEdit.visibility = View.GONE
 
         loginBtn.setOnClickListener {
@@ -55,13 +56,19 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
 
             this.presenter.authenticateUser(username, password, otpCode)
         }
+
+        logoutBtn.setOnClickListener {
+            this.presenter.logout()
+        }
     }
 
     override fun onLoginSuccess(name: String?) {
         Toast.makeText(this, "안녕하세요. $name 님.", Toast.LENGTH_SHORT).show()
-        startActivity(Intent(this, MainActivity::class.java))
-        overridePendingTransition(R.anim.abc_fade_in, R.anim.not_move_activity)
-        // finish()
+        usernameEdit.isEnabled = false
+        passwordEdit.isEnabled = false
+        loginBtn.isEnabled = false
+        logoutBtn.visibility = View.VISIBLE
+
     }
 
     override fun onLoginFailure(state: String?, needOTP: Boolean) {
@@ -69,6 +76,14 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
         if (needOTP) {
             OTPEdit.visibility = View.VISIBLE
         }
+    }
+
+    override fun onLogoutSuccess() {
+        Toast.makeText(this, "로그아웃 완료.", Toast.LENGTH_SHORT).show()
+        usernameEdit.isEnabled = true
+        passwordEdit.isEnabled = true
+        loginBtn.isEnabled = true
+        logoutBtn.visibility = View.GONE
     }
 
     override fun setRequestedOrientation(requestedOrientation: Int) {

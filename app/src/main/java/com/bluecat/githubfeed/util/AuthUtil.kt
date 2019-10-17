@@ -17,24 +17,59 @@
 package com.bluecat.githubfeed.util
 
 import android.util.Base64
-import android.util.Log
+
+import com.bluecat.githubfeed.persistence.PreferenceComponent_PrefComponent
+import com.bluecat.githubfeed.persistence.Preference_UserInfo
+import com.skydoves.preferenceroom.InjectPreference
 import org.json.JSONObject
+import timber.log.Timber
 
 object AuthUtil {
 
     const val BAD_CREDENTIAL = 0
     const val NEED_TWO_FACTOR = 1
 
+    @InjectPreference
+    lateinit var userInfo: Preference_UserInfo
+
+    init {
+        Timber.d("Initialize AuthUtil.")
+        PreferenceComponent_PrefComponent.getInstance().inject(this)
+    }
+
     fun basic(username: String, password: String): String {
         return "Basic " + Base64.encodeToString("$username:$password".toByteArray(), Base64.NO_WRAP)
     }
 
     fun getFailureCause(message: String?): Int {
-        Log.d("TEST", message?:"asdf")
-        val cause = JSONObject(message?:"{}").get("message") as String
+        val cause =
+            JSONObject(message ?: "{\"message\": \"Bad credentials\"}").get("message") as String
         return when (cause.contains("OTP")) {
             true -> NEED_TWO_FACTOR
             false -> BAD_CREDENTIAL
         }
+    }
+
+    fun sessionUsername() = userInfo.username
+
+    fun hasLoginSession(): Boolean {
+        return when (userInfo.token) {
+            "" -> false
+            else -> true
+        }
+    }
+
+    fun logout(): Boolean {
+        userInfo.removeToken()
+        userInfo.removeUsername()
+        return when (userInfo.token) {
+            "" -> true
+            else -> false
+        }
+    }
+
+    fun login(token: String, username: String?) {
+        userInfo.putToken(token)
+        userInfo.putUsername(username ?: "")
     }
 }
