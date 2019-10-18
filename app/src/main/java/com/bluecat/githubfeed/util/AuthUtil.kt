@@ -21,6 +21,7 @@ import android.util.Base64
 import com.bluecat.githubfeed.persistence.PreferenceComponent_PrefComponent
 import com.bluecat.githubfeed.persistence.Preference_UserInfo
 import com.skydoves.preferenceroom.InjectPreference
+import org.json.JSONException
 import org.json.JSONObject
 import timber.log.Timber
 
@@ -42,8 +43,11 @@ object AuthUtil {
     }
 
     fun getFailureCause(message: String?): Int {
-        val cause =
-            JSONObject(message ?: "{\"message\": \"Bad credentials\"}").get("message") as String
+        val cause = try {
+            JSONObject(message ?: "{\"message\": \"Bad credentials\"}").get("message").toString()
+        } catch (e: JSONException) {
+            "Bad credentials"
+        }
         return when (cause.contains("OTP")) {
             true -> NEED_TWO_FACTOR
             false -> BAD_CREDENTIAL

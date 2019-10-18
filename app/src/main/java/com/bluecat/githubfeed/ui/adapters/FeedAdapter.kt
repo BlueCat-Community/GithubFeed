@@ -7,18 +7,23 @@ import com.bluecat.githubfeed.ui.viewHolders.FeedViewHolder
 import com.skydoves.baserecyclerviewadapter.BaseAdapter
 import com.skydoves.baserecyclerviewadapter.SectionRow
 
-class FeedAdapter(private val delegate: FeedViewHolder.Delegate):BaseAdapter() {
+class FeedAdapter(private val delegate: FeedViewHolder.Delegate) : BaseAdapter() {
     private val sectionItem = 0
 
     init {
         addSection(ArrayList<TestData>())
     }
 
-    fun addItems(sampleItems:TestData){
-        addItemOnSection(sectionItem, sampleItems)
+    fun addItems(sampleItem: TestData) {
+        addItemOnSection(sectionItem, sampleItem)
+        notifyDataSetChanged()
+    }
+
+    fun removeItem(index: Int) {
+        sections()[0].removeAt(index)
         notifyDataSetChanged()
     }
 
     override fun layout(sectionRow: SectionRow) = R.layout.item_feed
-    override fun viewHolder(layout: Int, view: View)= FeedViewHolder(view, delegate)
+    override fun viewHolder(layout: Int, view: View) = FeedViewHolder(view, delegate)
 }

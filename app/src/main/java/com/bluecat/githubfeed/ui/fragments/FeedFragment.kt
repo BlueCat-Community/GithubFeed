@@ -29,12 +29,14 @@ import com.bluecat.githubfeed.model.TestData
 import com.bluecat.githubfeed.ui.adapters.FeedAdapter
 import com.bluecat.githubfeed.ui.viewHolders.FeedViewHolder
 import kotlinx.android.synthetic.main.fragment_feed.view.*
+
 import org.jetbrains.anko.support.v4.toast
 
 class FeedFragment : Fragment(), FeedViewHolder.Delegate {
 
     private var rootView: View? = null
     private val adapter by lazy { FeedAdapter(this) }
+    private var count = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,24 +50,24 @@ class FeedFragment : Fragment(), FeedViewHolder.Delegate {
         return rootView
     }
 
-    private fun initializeUI() = rootView?.also {
+    private fun initializeUI() = rootView?.also { it ->
+        it.adding.setOnClickListener { _ ->
+            toast("add")
+            addItems(TestData(count, it.etvt.text.toString()))
+            it.etvt.text.clear()
+        }
 
         it.main_recyclerview.adapter = adapter
         it.main_recyclerview.layoutManager = LinearLayoutManager(context)
-
-        for (r in 0..22) {
-            addItems(TestData("${r}:TESTDATA"))
-        }
-        // TODO
     }
 
-    private fun addItems(str:TestData)
-    {
+    private fun addItems(str: TestData) {
         adapter.addItems(str)
     }
 
-    override fun onItemClick(sampleItem: TestData) {
-        toast(sampleItem.testData)
+    override fun onItemClick(adapterPosition: Int, sampleItem: TestData) {
+        count--
+        adapter.removeItem(adapterPosition)
     }
 
 }
