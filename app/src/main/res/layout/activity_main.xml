@@ -5,7 +5,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:text="testing"
+        android:id="@+id/testingsss"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"/>
+
     <androidx.viewpager.widget.ViewPager
+        android:paddingTop="30dp"
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -46,9 +46,7 @@ class SplashActivity : BaseActivity<SplashPresenter, SplashActivityView>(),
     }
 
     override fun moveLogin() {
-        //TEST
-        //startActivity(Intent(this, LoginActivity::class.java))
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, LoginActivity::class.java))
         overridePendingTransition(R.anim.abc_fade_in, R.anim.not_move_activity)
         finish()
     }

@@ -16,6 +16,7 @@
 
 package com.bluecat.githubfeed.ui.activities.main
 
+import android.app.Dialog
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
@@ -42,7 +43,7 @@ class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
         initBaseView(this)
 
         // fetch user information
-        getGitHubUserInfo("skydoves")
+        //getGitHubUserInfo("skydoves")
     }
 
     override fun initializeUI() {
@@ -53,6 +54,9 @@ class MainActivity : BaseActivity<MainPresenter, MainActivityView>(),
         setViewPager()
 
         toast(this.presenter.getHelloMessage())
+
+        // TEST
+        testingsss.text = presenter.userInfo.username
     }
 
     override fun getGitHubUserInfo(username: String) {

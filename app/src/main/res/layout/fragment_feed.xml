@@ -2,16 +2,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<TextView
-    android:id="@+id/testInformation"
-   android:layout_alignParentTop="true"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="GitHub Fedd  ʕ•̫͡•ʕ•̫͡•ʔ•̫͡•ʔ•̫͡•ʕ•̫͡•ʔ"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_recyclerview"
-        android:layout_below="@+id/testInformation"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:paddingTop="50dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true">
+
+        <EditText
+            android:id="@+id/etvt"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/adding"
+            android:hint="hint" />
+
+        <Button
+            android:id="@+id/adding"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:text="ADD" />
+    </RelativeLayout>
+
+
 </RelativeLayout>

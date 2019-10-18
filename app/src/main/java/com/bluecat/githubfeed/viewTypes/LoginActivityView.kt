@@ -22,4 +22,7 @@ interface LoginActivityView : BaseView {
     fun onLoginSuccess(name: String?)
     fun onLoginFailure(state: String?, needOTP: Boolean)
     fun onLogoutSuccess()
+
+    fun showProgress()
+    fun dismissProgress()
 }

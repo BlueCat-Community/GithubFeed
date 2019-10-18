@@ -64,6 +64,9 @@ dependencies {
 
     // internal modules
     implementation project(":core")
+
+    // recyclerView module
+    implementation "com.github.skydoves:baserecyclerviewadapter:0.1.3"
 }
 
 apply from: '../spotless.gradle'

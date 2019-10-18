@@ -21,17 +21,22 @@ import com.bluecat.core.BasePresenter
 import com.bluecat.githubfeed.api.ApiResponse
 import com.bluecat.githubfeed.api.NetworkModule
 import com.bluecat.githubfeed.model.GithubUser
+import com.bluecat.githubfeed.persistence.PreferenceComponent_PrefComponent
+import com.bluecat.githubfeed.persistence.Preference_UserInfo
 import com.bluecat.githubfeed.viewTypes.MainActivityView
+import com.skydoves.preferenceroom.InjectPreference
 import timber.log.Timber
 
 class MainPresenter : BasePresenter<MainActivityView>() {
 
-
-    //TODO
+    @InjectPreference
+    lateinit var userInfo: Preference_UserInfo
     private val usersService = NetworkModule.userService
 
     init {
+        PreferenceComponent_PrefComponent.getInstance().inject(this)
         Timber.d("Initialize MainPresenter.")
+
     }
 
     fun getHelloMessage(): String {
