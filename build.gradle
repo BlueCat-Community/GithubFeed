@@ -22,7 +22,7 @@ buildscript {
 
         glideVersion = '4.9.0'
 
-        spotlessVersion = '3.22.0'
+        spotlessVersion = '3.25.0'
     }
     repositories {
         google()
