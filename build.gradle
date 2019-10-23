@@ -14,7 +14,7 @@ buildscript {
         lifecycleVersion = '2.2.0-alpha03'
         roomVersion = '2.2.0'
 
-        retrofitVersion = '2.3.0'
+        retrofitVersion = '2.6.2'
         okhttpVersion = '4.2.2'
         preferenceRoomVersion = '1.1.8'
 
