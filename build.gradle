@@ -11,7 +11,7 @@ buildscript {
 
         // architecture components
         archCompomentVersion = '2.1.0'
-        lifecycleVersion = '2.2.0-alpha03'
+        lifecycleVersion = '2.2.0-rc01'
         roomVersion = '2.2.0'
 
         retrofitVersion = '2.3.0'
