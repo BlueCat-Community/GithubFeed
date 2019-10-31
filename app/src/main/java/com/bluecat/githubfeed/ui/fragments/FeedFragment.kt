@@ -27,32 +27,32 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bluecat.githubfeed.R
 import com.bluecat.githubfeed.model.TestData
 import com.bluecat.githubfeed.ui.adapters.FeedRecyclerViewAdapter
-import kotlinx.android.synthetic.main.fragment_feed.view.*
+import kotlinx.android.synthetic.main.fragment_feed.*
 
 class FeedFragment : Fragment() {
 
-    private var rootView: View? = null
     private lateinit var testList: ArrayList<TestData>
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        rootView = inflater.inflate(R.layout.fragment_feed, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_feed, container, false)
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initializeUI()
 
-        return rootView
     }
 
-    private fun initializeUI() = rootView?.also {
+    private fun initializeUI() {
         testList = ArrayList()
         for (r in 0..22) {
             testList.add(TestData("${r}:TESTDATA"))
         }
-        it.main_recyclerview.adapter = FeedRecyclerViewAdapter(testList)
-        it.main_recyclerview.layoutManager = LinearLayoutManager(context)
+        main_recyclerview.adapter = FeedRecyclerViewAdapter(testList)
+        main_recyclerview.layoutManager = LinearLayoutManager(context)
         // TODO
     }
 

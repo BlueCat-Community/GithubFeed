@@ -16,11 +16,14 @@
 
 package com.bluecat.githubfeed.ui.activities.login
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.bluecat.core.BaseActivity
 import com.bluecat.core.qualifiers.RequirePresenter
@@ -46,27 +49,51 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
         supportActionBar?.hide()
         window.statusBarColor = resources.getColor(R.color.splash_statusbar_color)
 
+        (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+            .toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+
         presenter.checkLoginSession()
         OTPEdit.visibility = View.GONE
 
         loginBtn.setOnClickListener {
-            val username = usernameEdit.text.toString()
-            val password = passwordEdit.text.toString()
-            val otpCode = OTPEdit.text.toString()
+            loginAction()
+        }
 
-            this.presenter.authenticateUser(username, password, otpCode)
+        passwordEdit.setOnKeyListener { v, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN
+                && keyCode == KeyEvent.KEYCODE_ENTER
+            ) {
+                loginAction()
+                return@setOnKeyListener true
+            }
+            return@setOnKeyListener false
         }
 
         logoutBtn.setOnClickListener {
             this.presenter.logout()
         }
+
+    }
+
+    private fun setRelatedViewEnable(flag: Boolean) =
+        runOnUiThread {
+            loginBtn.isEnabled = flag
+            usernameEdit.isEnabled = flag
+            passwordEdit.isEnabled = flag
+        }
+
+    private fun loginAction() {
+        setRelatedViewEnable(false)
+
+        this.presenter.authenticateUser(
+            usernameEdit.text.toString(),
+            passwordEdit.text.toString(),
+            OTPEdit.text.toString()
+        )
     }
 
     override fun onLoginSuccess(name: String?) {
         Toast.makeText(this, "안녕하세요. $name 님.", Toast.LENGTH_SHORT).show()
-        usernameEdit.isEnabled = false
-        passwordEdit.isEnabled = false
-        loginBtn.isEnabled = false
         logoutBtn.visibility = View.VISIBLE
         startActivity(Intent(this, MainActivity::class.java))
         overridePendingTransition(R.anim.abc_fade_in, R.anim.not_move_activity)
@@ -75,6 +102,7 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
 
     override fun onLoginFailure(state: String?, needOTP: Boolean) {
         Toast.makeText(this, "Login Failure : $state", Toast.LENGTH_SHORT).show()
+        setRelatedViewEnable(true)
         if (needOTP) {
             OTPEdit.visibility = View.VISIBLE
         }
@@ -82,9 +110,7 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
 
     override fun onLogoutSuccess() {
         Toast.makeText(this, "로그아웃 완료.", Toast.LENGTH_SHORT).show()
-        usernameEdit.isEnabled = true
-        passwordEdit.isEnabled = true
-        loginBtn.isEnabled = true
+        setRelatedViewEnable(true)
         logoutBtn.visibility = View.GONE
     }
 

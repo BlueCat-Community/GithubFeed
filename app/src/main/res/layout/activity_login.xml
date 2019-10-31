@@ -20,8 +20,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:hint="Username"
             android:inputType="text"
+            android:windowSoftInputMode="stateAlwaysVisible"
             tools:text="Username" />
 
         <EditText
@@ -29,8 +32,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:hint="Password"
             android:inputType="textPassword"
+            android:windowSoftInputMode="stateAlwaysVisible"
             tools:text="Paswword" />
 
         <EditText
@@ -38,9 +44,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:hint="Two-factor authentication code"
             android:inputType="number"
             android:visibility="gone"
+            android:windowSoftInputMode="stateAlwaysVisible"
             tools:text="Two-factor authentication code" />
 
         <LinearLayout
@@ -59,8 +68,8 @@
                 android:id="@+id/logoutBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:text="Logout" />
+                android:text="Logout"
+                android:visibility="gone" />
         </LinearLayout>
 
     </LinearLayout>
