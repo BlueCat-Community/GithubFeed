@@ -6,7 +6,7 @@ import com.skydoves.baserecyclerviewadapter.BaseViewHolder
 import kotlinx.android.synthetic.main.item_feed.view.*
 
 class FeedViewHolder(view: View, private val delegate: Delegate) : BaseViewHolder(view) {
-    lateinit var sampleItem: TestData
+    private lateinit var sampleItem: TestData
 
     interface Delegate {
         fun onItemClick(adapterPosition: Int, sampleItem: TestData)

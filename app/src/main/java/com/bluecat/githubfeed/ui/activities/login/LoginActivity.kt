@@ -64,6 +64,7 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
         }
 
         loginBtn.setOnClickListener {
+            showProgress()
             loginAction()
         }
 
@@ -72,6 +73,7 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
             if (event.action == KeyEvent.ACTION_DOWN
                 && keyCode == KeyEvent.KEYCODE_ENTER
             ) {
+                showProgress()
                 loginAction()
                 return@setOnKeyListener true
             }
@@ -93,7 +95,6 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
         }
 
     private fun loginAction() {
-        showProgress()
         setRelatedViewEnable(false)
 
         this.presenter.authenticateUser(
@@ -128,13 +129,14 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
         logoutBtn.visibility = View.GONE
     }
 
-    override fun showProgress() {
-        progress?.show()
-    }
+    override fun showProgress() =
+        runOnUiThread { progress?.show() }
 
-    override fun dismissProgress() {
+
+    override fun dismissProgress() = runOnUiThread {
         progress?.dismiss()
     }
+
 
     override fun setRequestedOrientation(requestedOrientation: Int) {
         if (Build.VERSION.SDK_INT != Build.VERSION_CODES.O) {

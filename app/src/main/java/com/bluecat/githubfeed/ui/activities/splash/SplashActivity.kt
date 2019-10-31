@@ -25,7 +25,6 @@ import com.bluecat.core.qualifiers.RequirePresenter
 import com.bluecat.githubfeed.R
 import com.bluecat.githubfeed.presenters.SplashPresenter
 import com.bluecat.githubfeed.ui.activities.login.LoginActivity
-import com.bluecat.githubfeed.ui.activities.main.MainActivity
 import com.bluecat.githubfeed.viewTypes.SplashActivityView
 
 @Suppress("DEPRECATION")
