@@ -17,6 +17,7 @@
 package com.bluecat.githubfeed.ui.activities.login
 
 import android.content.Context
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Build
@@ -38,6 +39,8 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
     LoginActivityView {
 
+    var progress: Dialog? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -55,9 +58,15 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
         presenter.checkLoginSession()
         OTPEdit.visibility = View.GONE
 
+        progress = Dialog(this).apply {
+            title = "Loading"
+            setCancelable(false)
+        }
+
         loginBtn.setOnClickListener {
             loginAction()
         }
+
 
         passwordEdit.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN
@@ -70,6 +79,7 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
         }
 
         logoutBtn.setOnClickListener {
+            showProgress()
             this.presenter.logout()
         }
 
@@ -83,6 +93,7 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
         }
 
     private fun loginAction() {
+        showProgress()
         setRelatedViewEnable(false)
 
         this.presenter.authenticateUser(
@@ -93,6 +104,7 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
     }
 
     override fun onLoginSuccess(name: String?) {
+        dismissProgress()
         Toast.makeText(this, "안녕하세요. $name 님.", Toast.LENGTH_SHORT).show()
         logoutBtn.visibility = View.VISIBLE
         startActivity(Intent(this, MainActivity::class.java))
@@ -101,6 +113,7 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
     }
 
     override fun onLoginFailure(state: String?, needOTP: Boolean) {
+        dismissProgress()
         Toast.makeText(this, "Login Failure : $state", Toast.LENGTH_SHORT).show()
         setRelatedViewEnable(true)
         if (needOTP) {
@@ -109,9 +122,18 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginActivityView>(),
     }
 
     override fun onLogoutSuccess() {
+        dismissProgress()
         Toast.makeText(this, "로그아웃 완료.", Toast.LENGTH_SHORT).show()
         setRelatedViewEnable(true)
         logoutBtn.visibility = View.GONE
+    }
+
+    override fun showProgress() {
+        progress?.show()
+    }
+
+    override fun dismissProgress() {
+        progress?.dismiss()
     }
 
     override fun setRequestedOrientation(requestedOrientation: Int) {

@@ -28,10 +28,18 @@ import com.bluecat.githubfeed.R
 import com.bluecat.githubfeed.model.TestData
 import com.bluecat.githubfeed.ui.adapters.FeedRecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_feed.*
+import com.bluecat.githubfeed.ui.adapters.FeedAdapter
+import com.bluecat.githubfeed.ui.viewHolders.FeedViewHolder
+import kotlinx.android.synthetic.main.fragment_feed.view.*
 
-class FeedFragment : Fragment() {
+import org.jetbrains.anko.support.v4.toast
+
+class FeedFragment : Fragment(), FeedViewHolder.Delegate {
 
     private lateinit var testList: ArrayList<TestData>
+    private var rootView: View? = null
+    private val adapter by lazy { FeedAdapter(this) }
+    private var count = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,14 +54,24 @@ class FeedFragment : Fragment() {
 
     }
 
-    private fun initializeUI() {
-        testList = ArrayList()
-        for (r in 0..22) {
-            testList.add(TestData("${r}:TESTDATA"))
+    private fun initializeUI() = rootView?.also { it ->
+        it.adding.setOnClickListener { _ ->
+            toast("add")
+            addItems(TestData(count, it.etvt.text.toString()))
+            it.etvt.text.clear()
         }
-        main_recyclerview.adapter = FeedRecyclerViewAdapter(testList)
-        main_recyclerview.layoutManager = LinearLayoutManager(context)
-        // TODO
+
+        it.main_recyclerview.adapter = adapter
+        it.main_recyclerview.layoutManager = LinearLayoutManager(context)
+    }
+
+    private fun addItems(str: TestData) {
+        adapter.addItems(str)
+    }
+
+    override fun onItemClick(adapterPosition: Int, sampleItem: TestData) {
+        count--
+        adapter.removeItem(adapterPosition)
     }
 
 }

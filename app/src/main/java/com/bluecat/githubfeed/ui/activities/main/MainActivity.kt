@@ -16,6 +16,7 @@
 
 package com.bluecat.githubfeed.ui.activities.main
 
+import android.app.Dialog
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle

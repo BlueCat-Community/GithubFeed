@@ -14,15 +14,7 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.viewTypes
+package com.bluecat.githubfeed.api
 
-import com.bluecat.core.BaseView
-
-interface LoginActivityView : BaseView {
-    fun onLoginSuccess(name: String?)
-    fun onLoginFailure(state: String?, needOTP: Boolean)
-    fun onLogoutSuccess()
-
-    fun showProgress()
-    fun dismissProgress()
+interface FeedService {
 }

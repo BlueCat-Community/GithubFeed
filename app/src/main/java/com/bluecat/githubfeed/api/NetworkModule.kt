@@ -29,6 +29,7 @@ object NetworkModule {
     private val retrofit: Retrofit
     val userService: UsersService
     val loginService: LoginService
+    //val feedService:FeedService
 
     init {
         this.retrofit = Retrofit.Builder()
@@ -37,6 +38,7 @@ object NetworkModule {
             .addCallAdapterFactory(LiveDataCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
 
         this.userService = retrofit.create(UsersService::class.java)
         this.loginService = retrofit.create(LoginService::class.java)
