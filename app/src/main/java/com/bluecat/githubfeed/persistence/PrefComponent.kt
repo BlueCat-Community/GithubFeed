@@ -18,7 +18,6 @@ package com.bluecat.githubfeed.persistence
 
 import com.bluecat.githubfeed.presenters.LoginPresenter
 import com.bluecat.githubfeed.presenters.MainPresenter
-import com.bluecat.githubfeed.ui.activities.login.LoginActivity
 import com.bluecat.githubfeed.util.AuthUtil
 import com.skydoves.preferenceroom.PreferenceComponent
 

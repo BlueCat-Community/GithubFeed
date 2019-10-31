@@ -14,17 +14,25 @@
  * limitations under the License.
  */
 
-package com.bluecat.githubfeed.presenters
+package com.bluecat.githubfeed.model
 
-import android.os.Handler
-import android.os.Looper
-import com.bluecat.core.BasePresenter
-import com.bluecat.githubfeed.viewTypes.SplashActivityView
-import timber.log.Timber
-
-class SplashPresenter : BasePresenter<SplashActivityView>() {
-    init {
-        Timber.d("Initialize SplashPresenter.")
-        Handler(Looper.getMainLooper()).postDelayed({ baseView.moveLogin() }, 1000)
-    }
-}
+data class Watching(
+    val login: String,
+    val id: Int,
+    val node_id: String,
+    val avatar_url: String,
+    val gravatar_id: String,
+    val url: String,
+    val html_url: String,
+    val followers_url: String,
+    val following_url: String,
+    val gists_url: String,
+    val starred_url: String,
+    val subscriptions_url: String,
+    val organization_url: String,
+    val repos_url: String,
+    val events_url: String,
+    val received_events_url: String,
+    val type: String,
+    val site_admin: Boolean
+)
