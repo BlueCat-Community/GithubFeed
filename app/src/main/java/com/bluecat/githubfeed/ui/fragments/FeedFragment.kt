@@ -26,15 +26,14 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bluecat.githubfeed.R
 import com.bluecat.githubfeed.model.TestData
+import kotlinx.android.synthetic.main.fragment_feed.*
 import com.bluecat.githubfeed.ui.adapters.FeedAdapter
 import com.bluecat.githubfeed.ui.viewHolders.FeedViewHolder
-import kotlinx.android.synthetic.main.fragment_feed.view.*
 
 import org.jetbrains.anko.support.v4.toast
 
 class FeedFragment : Fragment(), FeedViewHolder.Delegate {
 
-    private var rootView: View? = null
     private val adapter by lazy { FeedAdapter(this) }
     private var count = 0
 
@@ -42,23 +41,23 @@ class FeedFragment : Fragment(), FeedViewHolder.Delegate {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        rootView = inflater.inflate(R.layout.fragment_feed, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_feed, container, false)
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initializeUI()
-
-        return rootView
     }
 
-    private fun initializeUI() = rootView?.also { it ->
-        it.adding.setOnClickListener { _ ->
+    private fun initializeUI() {
+        adding.setOnClickListener {
             toast("add")
-            addItems(TestData(count, it.etvt.text.toString()))
-            it.etvt.text.clear()
+            addItems(TestData(count, etvt.text.toString()))
+            etvt.text.clear()
         }
 
-        it.main_recyclerview.adapter = adapter
-        it.main_recyclerview.layoutManager = LinearLayoutManager(context)
+        main_recyclerview.adapter = adapter
+        main_recyclerview.layoutManager = LinearLayoutManager(context)
     }
 
     private fun addItems(str: TestData) {
