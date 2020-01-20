@@ -21,7 +21,7 @@ buildscript {
 
         timberVersion = '4.7.1'
 
-        glideVersion = '4.10.0'
+        glideVersion = '4.11.0'
 
         spotlessVersion = '3.26.0'
     }
